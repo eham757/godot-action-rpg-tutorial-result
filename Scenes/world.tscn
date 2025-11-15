@@ -219,7 +219,7 @@ position = Vector2(520, 268)
 position = Vector2(575, 268)
 
 [node name="BatEnemy7" parent="Enemies" instance=ExtResource("7_k7acu")]
-position = Vector2(575, 268)
+position = Vector2(547, 268)
 
 [node name="Player" parent="." instance=ExtResource("1_a02cp")]
 y_sort_enabled = true

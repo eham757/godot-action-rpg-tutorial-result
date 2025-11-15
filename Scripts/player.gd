@@ -6,6 +6,8 @@ const ROLL_SPEED:float = 150.0
 var input_vector:= Vector2.ZERO
 var last_input_vector:= Vector2.ZERO
 
+@export var stats: Stats
+
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var playback: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/StateMachine/playback")
 @onready var sword_hitbox_area: Hitbox = $SwordHitboxArea

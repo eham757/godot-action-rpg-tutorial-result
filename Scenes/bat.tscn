@@ -1,9 +1,16 @@
-[gd_scene load_steps=20 format=3 uid="uid://cfdkfmy1gitks"]
+[gd_scene load_steps=22 format=3 uid="uid://cfdkfmy1gitks"]
 
 [ext_resource type="Texture2D" uid="uid://b0j3rr585r2sl" path="res://Assets/enemies/bat.png" id="1_j7be8"]
 [ext_resource type="Script" uid="uid://bonrnqymy3ph1" path="res://Scripts/bat_enemy.gd" id="1_wt6c1"]
 [ext_resource type="Texture2D" uid="uid://cj13d1oee0kyj" path="res://Assets/shadows/small_shadow.png" id="2_jckqh"]
+[ext_resource type="Script" uid="uid://cl7cqm52ekx5p" path="res://stats.gd" id="2_mqh3e"]
 [ext_resource type="Script" uid="uid://cmebxjx8s4v2l" path="res://Scripts/hurtbox.gd" id="4_50dnf"]
+
+[sub_resource type="Resource" id="Resource_y36tb"]
+script = ExtResource("2_mqh3e")
+health = 3
+max_health = 3
+metadata/_custom_type_script = "uid://cl7cqm52ekx5p"
 
 [sub_resource type="Animation" id="Animation_wt6c1"]
 length = 0.001
@@ -137,6 +144,7 @@ collision_layer = 4
 collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_wt6c1")
+stats = SubResource("Resource_y36tb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_j7be8")
