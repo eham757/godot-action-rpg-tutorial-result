@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cfdkfmy1gitks"]
+[gd_scene load_steps=20 format=3 uid="uid://cfdkfmy1gitks"]
 
 [ext_resource type="Texture2D" uid="uid://b0j3rr585r2sl" path="res://Assets/enemies/bat.png" id="1_j7be8"]
 [ext_resource type="Script" uid="uid://bonrnqymy3ph1" path="res://Scripts/bat_enemy.gd" id="1_wt6c1"]
@@ -38,14 +38,35 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4]
 }
 
+[sub_resource type="Animation" id="Animation_50dnf"]
+resource_name = "hit"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_50dnf"]
 _data = {
 &"RESET": SubResource("Animation_wt6c1"),
-&"fly": SubResource("Animation_jckqh")
+&"fly": SubResource("Animation_jckqh"),
+&"hit": SubResource("Animation_50dnf")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_50dnf"]
 animation = &"fly"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y36tb"]
+animation = &"hit"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mqh3e"]
 animation = &"fly"
@@ -61,15 +82,22 @@ advance_expression = "can_see_player()"
 advance_mode = 2
 advance_expression = "not can_see_player()"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_50dnf"]
+advance_mode = 2
+advance_expression = "velocity == Vector2(0,0)"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_mqh3e"]
-states/Chase/node = SubResource("AnimationNodeAnimation_50dnf")
-states/Chase/position = Vector2(496, 173)
-states/Idle/node = SubResource("AnimationNodeAnimation_mqh3e")
-states/Idle/position = Vector2(496, 54)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_y36tb"), "Idle", "Chase", SubResource("AnimationNodeStateMachineTransition_cawgt"), "Chase", "Idle", SubResource("AnimationNodeStateMachineTransition_fk7gk")]
+states/ChaseState/node = SubResource("AnimationNodeAnimation_50dnf")
+states/ChaseState/position = Vector2(496, 173)
+states/HitState/node = SubResource("AnimationNodeAnimation_y36tb")
+states/HitState/position = Vector2(680, 54)
+states/IdleState/node = SubResource("AnimationNodeAnimation_mqh3e")
+states/IdleState/position = Vector2(496, 54)
+transitions = ["Start", "IdleState", SubResource("AnimationNodeStateMachineTransition_y36tb"), "IdleState", "ChaseState", SubResource("AnimationNodeStateMachineTransition_cawgt"), "ChaseState", "IdleState", SubResource("AnimationNodeStateMachineTransition_fk7gk"), "HitState", "IdleState", SubResource("AnimationNodeStateMachineTransition_50dnf")]
 graph_offset = Vector2(-257, -22)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_y36tb"]
+graph_offset = Vector2(-351, 29)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_mqh3e")
 nodes/StateMachine/position = Vector2(40, 140)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -115,6 +143,8 @@ texture = ExtResource("2_jckqh")
 target_position = Vector2(8, 0)
 
 [node name="HurtBoxArea" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
 script = ExtResource("4_50dnf")
 metadata/_custom_type_script = "uid://cmebxjx8s4v2l"
 

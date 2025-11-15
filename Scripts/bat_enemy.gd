@@ -6,27 +6,37 @@ class_name Bat extends CharacterBody2D
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 @onready var hurt_box_area: Area2D = $HurtBoxArea
 
-const SPEED = 125
+const SPEED = 90
+const FRICTION = 500
 
 @export var range: int = 64
 
 func _ready() -> void:
-	hurt_box_area.area_entered.connect(func(other_area_2d:Area2D):
-		queue_free()
-	)
+	hurt_box_area.hurt.connect(take_hit.call_deferred)
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	var state = playback.get_current_node()
 	match state:
-		"Idle":
+		"IdleState":
 			pass
 			
-		"Chase":
+		"ChaseState":
 			var player = get_player()
 			if player is Player:
 				velocity = global_position.direction_to(player.global_position) * SPEED
 				sprite_2d.scale.x = sign(velocity.x)
 			move_and_slide()
+		"HitState":
+			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+			move_and_slide()
+
+func take_hit(hitting_hitbox: Hitbox) -> void:
+		print(hitting_hitbox)
+		print(hitting_hitbox.knockback_direction)
+		velocity = hitting_hitbox.knockback_direction * hitting_hitbox.knockback_amount
+		playback.start("HitState")
+		print("hit")
+		#queue_free()
 	
 func get_player() -> Player:
 	return get_tree().get_first_node_in_group("player")

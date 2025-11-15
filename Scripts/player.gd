@@ -8,10 +8,12 @@ var last_input_vector:= Vector2.ZERO
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var playback: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/StateMachine/playback")
+@onready var sword_hitbox_area: Hitbox = $SwordHitboxArea
 
 func _physics_process(_delta: float) -> void:
 	var state = playback.get_current_node()
 	input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	sword_hitbox_area.knockback_direction = last_input_vector.normalized() #Tutorial used animation for this, i chose to keep it like this
 	
 	if Input.is_action_pressed("attack"):
 		playback.travel("AttackState")
