@@ -5,7 +5,8 @@ class_name Bat extends CharacterBody2D
 const SPEED = 90
 const FRICTION = 500
 
-@export var range: int = 64
+@export var max_range: int = 96
+@export var min_range: int = 4
 @export var stats: Stats
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
@@ -48,7 +49,7 @@ func is_player_in_range() -> bool:
 	var player = get_player()
 	if player is Player:
 		var distance_to_player = global_position.distance_to(player.global_position)
-		if distance_to_player < range:
+		if distance_to_player < max_range and distance_to_player > min_range:
 			result = true
 	return result
 

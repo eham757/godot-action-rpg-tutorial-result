@@ -1,10 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://cfdkfmy1gitks"]
+[gd_scene load_steps=24 format=3 uid="uid://cfdkfmy1gitks"]
 
 [ext_resource type="Texture2D" uid="uid://b0j3rr585r2sl" path="res://Assets/enemies/bat.png" id="1_j7be8"]
 [ext_resource type="Script" uid="uid://bonrnqymy3ph1" path="res://Scripts/bat_enemy.gd" id="1_wt6c1"]
 [ext_resource type="Texture2D" uid="uid://cj13d1oee0kyj" path="res://Assets/shadows/small_shadow.png" id="2_jckqh"]
 [ext_resource type="Script" uid="uid://cl7cqm52ekx5p" path="res://stats.gd" id="2_mqh3e"]
 [ext_resource type="Script" uid="uid://cmebxjx8s4v2l" path="res://Scripts/hurtbox.gd" id="4_50dnf"]
+[ext_resource type="Script" uid="uid://dnp4g5w4trr8b" path="res://Scripts/hitbox.gd" id="6_y36tb"]
 
 [sub_resource type="Resource" id="Resource_y36tb"]
 script = ExtResource("2_mqh3e")
@@ -133,15 +134,21 @@ nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_mqh3e")
 nodes/StateMachine/position = Vector2(40, 140)
 node_connections = [&"output", 0, &"StateMachine"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jckqh"]
-size = Vector2(10, 23)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_wt6c1"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fk7gk"]
 radius = 5.0
+height = 22.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y36tb"]
+radius = 5.0
+height = 22.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cawgt"]
+radius = 5.0
+height = 22.0
 
 [node name="BatEnemy" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 7
+collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_wt6c1")
 stats = SubResource("Resource_y36tb")
@@ -163,8 +170,8 @@ advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -5.5)
-shape = SubResource("RectangleShape2D_jckqh")
+position = Vector2(0, -4)
+shape = SubResource("CapsuleShape2D_fk7gk")
 
 [node name="ShadowSprite" type="Sprite2D" parent="."]
 show_behind_parent = true
@@ -181,5 +188,16 @@ script = ExtResource("4_50dnf")
 metadata/_custom_type_script = "uid://cmebxjx8s4v2l"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxArea"]
-position = Vector2(0, -8)
-shape = SubResource("CircleShape2D_wt6c1")
+position = Vector2(0, -4)
+shape = SubResource("CapsuleShape2D_y36tb")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("6_y36tb")
+metadata/_custom_type_script = "uid://dnp4g5w4trr8b"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -4)
+shape = SubResource("CapsuleShape2D_cawgt")
+debug_color = Color(0.94711775, 0.21030328, 0.25676292, 0.41960785)
