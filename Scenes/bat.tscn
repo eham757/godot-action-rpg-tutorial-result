@@ -201,3 +201,6 @@ metadata/_custom_type_script = "uid://dnp4g5w4trr8b"
 position = Vector2(0, -4)
 shape = SubResource("CapsuleShape2D_cawgt")
 debug_color = Color(0.94711775, 0.21030328, 0.25676292, 0.41960785)
+
+[node name="Center" type="Marker2D" parent="."]
+position = Vector2(0, -10)

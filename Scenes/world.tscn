@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://bcmmqr77foyao"]
+[gd_scene load_steps=12 format=4 uid="uid://bcmmqr77foyao"]
 
 [ext_resource type="PackedScene" uid="uid://da6wy72mkvwps" path="res://Scenes/player.tscn" id="1_a02cp"]
 [ext_resource type="TileSet" uid="uid://b8v83aji5cm5q" path="res://Assets/world/cliff_tileset.tres" id="2_5ukr8"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://cfdkfmy1gitks" path="res://Scenes/bat.tscn" id="7_k7acu"]
 [ext_resource type="PackedScene" uid="uid://backyvg34plda" path="res://Scenes/grass.tscn" id="7_o06y3"]
 [ext_resource type="PackedScene" uid="uid://fd112h5dd35d" path="res://Scenes/hearts_ui.tscn" id="9_5v1tr"]
+[ext_resource type="AudioStream" uid="uid://pau7tgh2b6rh" path="res://Assets/music_and_sounds/music.mp3" id="10_0fj1v"]
+[ext_resource type="PackedScene" uid="uid://csiy5t8f1m135" path="res://pause.tscn" id="11_ikia7"]
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -237,3 +239,12 @@ offset_left = 15.0
 offset_top = 15.0
 offset_right = 55.0
 offset_bottom = 55.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_0fj1v")
+autoplay = true
+bus = &"Music"
+parameters/looping = true
+
+[node name="Pause" parent="." instance=ExtResource("11_ikia7")]
+process_mode = 3

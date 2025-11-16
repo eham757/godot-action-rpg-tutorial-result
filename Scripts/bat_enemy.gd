@@ -1,6 +1,7 @@
 class_name Bat extends CharacterBody2D
 
-
+const HIT_EFFECT = preload("uid://4stmwwbnl0fc")
+const DEATH_EFFECT = preload("uid://dmqk5i7s3g4vx")
 
 const SPEED = 90
 const FRICTION = 500
@@ -14,11 +15,12 @@ const FRICTION = 500
 @onready var playback: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/StateMachine/playback")
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 @onready var hurt_box_area: Area2D = $HurtBoxArea
+@onready var center: Marker2D = $Center
 
 func _ready() -> void:
 	stats = stats.duplicate()
 	hurt_box_area.hurt.connect(take_hit.call_deferred)
-	stats.no_health.connect(queue_free)
+	stats.no_health.connect(die)
 
 func _physics_process(delta: float) -> void:
 	var state = playback.get_current_node()
@@ -37,9 +39,18 @@ func _physics_process(delta: float) -> void:
 			move_and_slide()
 
 func take_hit(hitting_hitbox: Hitbox) -> void:
-		velocity = hitting_hitbox.knockback_direction * hitting_hitbox.knockback_amount
-		playback.start("HitState")
-		stats.health -= hitting_hitbox.damage
+	var hit_effect = HIT_EFFECT.instantiate()
+	get_tree().current_scene.add_child(hit_effect)
+	hit_effect.global_position = center.global_position
+	velocity = hitting_hitbox.knockback_direction * hitting_hitbox.knockback_amount
+	playback.start("HitState")
+	stats.health -= hitting_hitbox.damage
+	
+func die() -> void:
+	var death_effect = DEATH_EFFECT.instantiate()
+	get_tree().current_scene.add_child(death_effect)
+	death_effect.global_position = global_position
+	queue_free()
 	
 func get_player() -> Player:
 	return get_tree().get_first_node_in_group("player")
