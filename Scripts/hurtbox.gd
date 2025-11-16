@@ -7,4 +7,7 @@ func _ready() -> void:
 	
 func _other_area_entered(area2d: Area2D) -> void:
 	if area2d is not Hitbox: return
-	hurt.emit(area2d)
+	var hitbox = area2d as Hitbox
+	if self in hitbox.hit_targets: return
+	if hitbox.stores_hit_target: hitbox.hit_targets.append(self)
+	hurt.emit(hitbox)

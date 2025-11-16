@@ -1,17 +1,11 @@
-[gd_scene load_steps=61 format=3 uid="uid://da6wy72mkvwps"]
+[gd_scene load_steps=60 format=3 uid="uid://da6wy72mkvwps"]
 
 [ext_resource type="Script" uid="uid://bhppeg7vu7mk7" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="Texture2D" uid="uid://b4886wkowqi0n" path="res://Assets/player/player.png" id="2_cvnsp"]
-[ext_resource type="Script" uid="uid://cl7cqm52ekx5p" path="res://stats.gd" id="2_fkybt"]
+[ext_resource type="Resource" uid="uid://ceshsc613odbk" path="res://player_stats.tres" id="2_x3wgy"]
 [ext_resource type="Texture2D" uid="uid://cy0fcrgisbkh2" path="res://Assets/shadows/medium_shadow.png" id="3_6t5aa"]
 [ext_resource type="Script" uid="uid://dnp4g5w4trr8b" path="res://Scripts/hitbox.gd" id="4_vgqql"]
 [ext_resource type="Script" uid="uid://cmebxjx8s4v2l" path="res://Scripts/hurtbox.gd" id="6_x3wgy"]
-
-[sub_resource type="Resource" id="Resource_x3wgy"]
-script = ExtResource("2_fkybt")
-health = 5
-max_health = 5
-metadata/_custom_type_script = "uid://cl7cqm52ekx5p"
 
 [sub_resource type="Animation" id="Animation_ukyrk"]
 resource_name = " attack_left"
@@ -40,6 +34,20 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [PackedVector2Array(-1, -17, -2, -16, -2, -10, -2, -7, 1, -7, 1, -16, 0, -17), PackedVector2Array(-2, -12, -3, -13, -7, -13, -12, -12, -15, -11, -17, -10, -21, -8, -24, -4, -26, 1, -27, 6, -26, 7, -12, 7, -11, 6, -11, 2, -11, -2, -10, -4, -8, -7, -4, -10, -2, -11), PackedVector2Array(-6, -12, -12, -12, -19, -9, -21, -8, -24, -4, -26, 1, -26, 7, -23, 13, -17, 17, -11, 20, -8, 20, -7, 19, -5, 15, -3, 11, -3, 8, -4, 7, -8, 6, -11, 5, -13, 4, -14, 3, -15, 0, -16, 0, -16, -4, -15, -4, -14, -6, -13, -8, -12, -9, -9, -10, -6, -11), PackedVector2Array(-12, 18, -8, 20, -3, 21, 2, 21, 3, 20, 3, 10, 0, 10, -1, 13, -3, 15, -4, 16, -6, 17, -10, 17, -12, 17), PackedVector2Array()]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SwordHitboxArea")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"clear_hit_targets"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_6t5aa"]
@@ -109,6 +117,20 @@ tracks/1/keys = {
 "update": 1,
 "values": [PackedVector2Array(6, 3, 17, 3, 18, 4, 18, 5, 17, 6, 6, 6), PackedVector2Array(-4, 16, -4, 29, -3, 30, 1, 30, 7, 28, 13, 23, 15, 19, 16, 16, 16, 11, 15, 11, 14, 13, 13, 14, 10, 15, 7, 16, -3, 17), PackedVector2Array(-10, 11, -20, 16, -19, 20, -14, 26, -8, 29, -4, 30, 1, 30, 5, 29, 9, 27, 12, 24, 14, 21, 16, 16, 16, 13, 15, 13, 14, 15, 12, 17, 10, 18, 7, 19, 0, 19, -4, 17, -7, 14), PackedVector2Array(-10, 3, -21, 3, -22, 4, -22, 8, -20, 12, -17, 15, -15, 15, -15, 14, -16, 12, -16, 10, -15, 8, -13, 7, -9, 6), PackedVector2Array()]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SwordHitboxArea")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"clear_hit_targets"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_gymyn"]
 resource_name = "attack_right"
@@ -138,6 +160,20 @@ tracks/1/keys = {
 "update": 1,
 "values": [PackedVector2Array(0, -17, -1, -16, -1, -7, 2, -7, 2, -16, 1, -17), PackedVector2Array(2, -12, 2, -11, 4, -10, 6, -9, 8, -7, 10, -4, 11, -2, 11, 2, 11, 6, 12, 7, 26, 7, 27, 6, 26, 1, 25, -2, 23, -5, 19, -9, 15, -11, 12, -12, 7, -13), PackedVector2Array(3, 11, 7, 19, 8, 20, 11, 20, 16, 18, 22, 13, 25, 9, 26, 2, 25, -2, 21, -8, 14, -11, 9, -12, 6, -12, 6, -11, 9, -10, 14, -8, 15, -4, 15, 0, 13, 4, 8, 6, 4, 7), PackedVector2Array(-3, 10, -3, 20, -2, 21, 3, 21, 11, 19, 12, 17, 6, 17, 3, 15, 0, 10), PackedVector2Array()]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SwordHitboxArea")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"clear_hit_targets"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_pu2lt"]
 resource_name = "attack_up"
@@ -166,6 +202,20 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [PackedVector2Array(-21, 0, -21, 1, -20, 2, -9, 2, -9, -1, -20, -1), PackedVector2Array(-20, 3, -20, -3, -19, -6, -15, -13, -8, -18, -4, -19, 0, -19, 1, -18, 1, -9, -7, -7, -14, -4, -19, 3), PackedVector2Array(9, -1, 19, -6, 18, -10, 10, -17, 3, -19, -4, -19, -10, -17, -14, -14, -16, -12, -18, -8, -18, -6, -17, -6, -16, -7, -15, -9, -9, -12, -1, -11, 2, -9, 6, -4), PackedVector2Array(10, 4, 20, 4, 21, 3, 21, -4, 20, -6, 17, -11, 16, -12, 15, -12, 15, -10, 15, -2, 13, 0, 10, 1), PackedVector2Array()]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SwordHitboxArea")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"clear_hit_targets"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_igrcy"]
@@ -586,6 +636,33 @@ nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_qqcod")
 nodes/StateMachine/position = Vector2(-200, 120)
 node_connections = [&"output", 0, &"StateMachine"]
 
+[sub_resource type="Animation" id="Animation_l6n3p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hurtbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="Animation" id="Animation_fs7ks"]
 resource_name = "blink"
 length = 0.5
@@ -615,33 +692,6 @@ tracks/1/keys = {
 "values": [true, true, false]
 }
 
-[sub_resource type="Animation" id="Animation_l6n3p"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Hurtbox/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_olqyp"]
 _data = {
 &"RESET": SubResource("Animation_l6n3p"),
@@ -655,7 +705,7 @@ size = Vector2(10, 11)
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_v0iea")
-stats = SubResource("Resource_x3wgy")
+stats = ExtResource("2_x3wgy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_cvnsp")
@@ -688,6 +738,7 @@ texture = ExtResource("3_6t5aa")
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("4_vgqql")
+stores_hit_target = true
 metadata/_custom_type_script = "uid://dnp4g5w4trr8b"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SwordHitboxArea"]
