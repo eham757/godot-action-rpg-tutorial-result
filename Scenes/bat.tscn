@@ -129,7 +129,6 @@ transitions = ["Start", "IdleState", SubResource("AnimationNodeStateMachineTrans
 graph_offset = Vector2(-257, -22)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_y36tb"]
-graph_offset = Vector2(-351, 29)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_mqh3e")
 nodes/StateMachine/position = Vector2(40, 140)
 node_connections = [&"output", 0, &"StateMachine"]
@@ -204,3 +203,9 @@ debug_color = Color(0.94711775, 0.21030328, 0.25676292, 0.41960785)
 
 [node name="Center" type="Marker2D" parent="."]
 position = Vector2(0, -10)
+
+[node name="NavigationPosMarker" type="Marker2D" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="NavigationPosMarker"]
+path_desired_distance = 4.0
+target_desired_distance = 4.0
